@@ -8,10 +8,17 @@ import Foundation
 import UIKit
 
 class SplashViewController: UIViewController {
+    
+    weak var delegate: SplashViewDelegate?
+    
     private let splashView = SplashView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view = splashView
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            self?.delegate?.navigateToHome()
+        }
     }
 }

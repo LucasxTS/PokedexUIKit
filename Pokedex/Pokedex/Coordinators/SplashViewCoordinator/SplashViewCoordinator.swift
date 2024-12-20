@@ -12,15 +12,19 @@ class SplashViewCoordinator: SplashViewDelegate  {
     private var navigationController: UINavigationController?
 
     
+    init(navigationController: UINavigationController) {
+            self.navigationController = navigationController
+        }
+    
     func start() -> UINavigationController? {
-        //let contentView = SplashView()
         let startViewController = SplashViewController()
-        self.navigationController = UINavigationController(rootViewController: startViewController)
-        
+        startViewController.delegate = self
+        navigationController?.setViewControllers([startViewController], animated: false)
         return navigationController
     }
     
     func navigateToHome() {
-        
+        let welcomeViewController = WelcomeViewController()
+        navigationController?.pushViewController(welcomeViewController, animated: false)
     }
 }
