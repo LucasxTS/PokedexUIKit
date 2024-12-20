@@ -25,6 +25,6 @@ class SplashViewCoordinator: SplashViewDelegate  {
     
     func navigateToHome() {
         let welcomeViewController = WelcomeViewController()
-        navigationController?.pushViewController(welcomeViewController, animated: false)
+        navigationController?.setViewControllers([welcomeViewController], animated: true)
     }
 }
