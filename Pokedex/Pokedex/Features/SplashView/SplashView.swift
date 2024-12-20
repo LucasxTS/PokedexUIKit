@@ -40,8 +40,8 @@ class SplashView: UIView {
         
         NSLayoutConstraint.activate([
         imageView.topAnchor.constraint(equalTo: topAnchor),
-        imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-        imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+        imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 96),
+        imageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -96),
         imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }

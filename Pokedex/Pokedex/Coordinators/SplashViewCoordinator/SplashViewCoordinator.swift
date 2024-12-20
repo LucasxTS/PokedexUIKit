@@ -1,21 +1,16 @@
 //
-//  PokedexFlowController.swift
+//  SplashViewCoordinator.swift
 //  Pokedex
 //
-//  Created by Lucas Eduardo Torres Santana on 18/12/24.
+//  Created by Lucas Eduardo Torres Santana on 19/12/24.
 //
 
 import Foundation
 import UIKit
 
-class PokedexFlowCoordinator  {
-    
+class SplashViewCoordinator: SplashViewDelegate  {
     private var navigationController: UINavigationController?
-    
-    
-    public init() {
-        
-    }
+
     
     func start() -> UINavigationController? {
         //let contentView = SplashView()
@@ -25,4 +20,7 @@ class PokedexFlowCoordinator  {
         return navigationController
     }
     
+    func navigateToHome() {
+        
+    }
 }

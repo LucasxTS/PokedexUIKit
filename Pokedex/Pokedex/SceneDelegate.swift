@@ -10,13 +10,13 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private var flowCoordinator: PokedexFlowCoordinator?
+    private var flowCoordinator: SplashViewCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        flowCoordinator = PokedexFlowCoordinator()
+        flowCoordinator = SplashViewCoordinator()
         let rootViewController = flowCoordinator?.start()
         
         window.rootViewController = rootViewController
