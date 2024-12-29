@@ -10,97 +10,105 @@ import UIKit
 
 class WelcomeViewController: UIViewController, UIScrollViewDelegate {
     private let welcomeView = WelcomeView()
-    private let pages = [
-        (image: UIImage(systemName: "trainer1"),
-         title: " Todos os Pókemons em um só lugar! ",
-         description: "Acesse uma vasta lista de Pokémon de todas as gerações já feitas pela Nintendo"),
-        (image: UIImage(systemName: "trainer1"),
-         title: " Todos os Pókemons em um só lugar! ",
-         description: "Acesse uma vasta lista de Pokémon de todas as gerações já feitas pela Nintendo")
-    ]
+    private var views: [UIView] = []
+    
     
     override func loadView() {
         super.loadView()
         view = welcomeView
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureScrollView()
         welcomeView.scrollView.delegate = self
-        welcomeView.pageControl.addTarget(self, action: #selector(pageControlChanged), for: .valueChanged)
+        setupPages()
     }
     
-    private func configureScrollView() {
-        let scrollView = welcomeView.scrollView
-        let scrollViewWidth = view.frame.width - 40
-        let scrollViewHeight: CGFloat = 300
+    private func setupPages() {
+        let page1 = createPageView(
+            image: UIImage(named: "trainer1"),
+            title: "Todos os Pokémon em um só lugar!",
+            description: "Acesse uma vasta lista de Pokémon de todas as gerações já feitas pela Nintendo."
+        )
         
-        scrollView.contentSize = CGSize(width: scrollViewWidth * CGFloat(pages.count), height: scrollViewHeight)
+        let page2 = createPageView(
+            image: UIImage(named: "trainer2"),
+            title: "Mantenha sua Pokédex atualizada",
+            description: "Cadastre-se e mantenha seu perfil, Pokémon favoritos e muito mais salvos no aplicativo."
+        )
         
-        for (index, page) in pages.enumerated() {
+        views = [page1, page2]
+        
+        for (index, page) in views.enumerated() {
+            page.frame = CGRect(
+                x: welcomeView.scrollView.bounds.width * CGFloat(index),
+                y: 0,
+                width: welcomeView.scrollView.bounds.width,
+                height: welcomeView.scrollView.bounds.height
+            )
+            welcomeView.scrollView.addSubview(page)
             
-            let pageView = createPageView(frame: CGRect(
-                x: scrollViewWidth * CGFloat(index), y: 0, width: scrollViewWidth, height: scrollViewHeight
-            ), image: page.image, title: page.title, description: page.description)
+            NSLayoutConstraint.activate([
+                        page.topAnchor.constraint(equalTo: welcomeView.scrollView.topAnchor),
+                        page.bottomAnchor.constraint(equalTo: welcomeView.scrollView.bottomAnchor),
+                        page.leadingAnchor.constraint(equalTo: welcomeView.scrollView.leadingAnchor, constant: welcomeView.scrollView.bounds.width * CGFloat(index)),
+            page.widthAnchor.constraint(equalTo: welcomeView.scrollView.widthAnchor)
+                    ])
         }
+
+        welcomeView.scrollView.contentSize = CGSize(
+            width: welcomeView.scrollView.bounds.width * CGFloat(views.count),
+            height: welcomeView.scrollView.bounds.height
+        )
     }
     
-     func createPageView(frame: CGRect, image: UIImage?, title: String, description: String) -> UIView {
-        let view = UIView(frame: frame)
+    private func createPageView(image: UIImage?, title: String, description: String) -> UIView {
+        let page = UIView()
+        page.translatesAutoresizingMaskIntoConstraints = false
         
-        lazy var imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        lazy var descriptionLabel = UILabel()
-        descriptionLabel.text = description
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.numberOfLines = 0
-        descriptionLabel.textAlignment = .center
-        descriptionLabel.textColor = .gray
-       
-        lazy var titleLabel = UILabel()
-        titleLabel.textColor = .black
-        titleLabel.font = .systemFont(ofSize: 24, weight: .bold)
-        titleLabel.text = " Todos os Pókemons em um só lugar! "
-        titleLabel.numberOfLines = 0
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-       
-        view.addSubview(imageView)
-        view.addSubview(titleLabel)
-        view.addSubview(descriptionLabel)
         
-         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 100),
-            imageView.widthAnchor.constraint(equalToConstant: 100),
+        let descriptionLabel = UILabel()
+        descriptionLabel.text = description
+        descriptionLabel.font = UIFont.systemFont(ofSize: 16)
+        descriptionLabel.textAlignment = .center
+        descriptionLabel.numberOfLines = 0
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        page.addSubview(imageView)
+        page.addSubview(titleLabel)
+        page.addSubview(descriptionLabel)
+        
+        NSLayoutConstraint.activate([
             
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: -10),
+            imageView.topAnchor.constraint(equalTo: page.topAnchor, constant: 20),
+            imageView.centerXAnchor.constraint(equalTo: page.centerXAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: 150),
+            imageView.heightAnchor.constraint(equalToConstant: 150),
             
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            descriptionLabel.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: -10),
-         ])
-         
-        return view
-    }
-    
-    @objc private func pageControlChanged(_ sender: UIPageControl) {
-        let currentPage = sender.currentPage
-        let scrollViewWidth = view.frame.width - 40
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
+            titleLabel.leadingAnchor.constraint(equalTo: page.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: page.trailingAnchor, constant: -20),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            descriptionLabel.leadingAnchor.constraint(equalTo: page.leadingAnchor, constant: 20),
+            descriptionLabel.trailingAnchor.constraint(equalTo: page.trailingAnchor, constant: -20),
+            descriptionLabel.bottomAnchor.constraint(lessThanOrEqualTo: page.bottomAnchor, constant: -20)
+        ])
         
-        welcomeView.scrollView.setContentOffset(CGPoint(x: scrollViewWidth * CGFloat(currentPage), y: 0), animated: true)
+        return page
     }
-    
-      func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let pageWidth = view.frame.width - 40
-        let currentPage = Int(scrollView.contentOffset.x / pageWidth)
-        
-         welcomeView.pageControl.currentPage = currentPage
-    }
+
 }
+    
