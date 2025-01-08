@@ -8,13 +8,12 @@
 import Foundation
 import UIKit
 
-class SplashViewCoordinator: SplashViewDelegate  {
+class AppCoordinator {
     private var navigationController: UINavigationController?
-
     
     init(navigationController: UINavigationController) {
-            self.navigationController = navigationController
-        }
+        self.navigationController = navigationController
+    }
     
     func start() -> UINavigationController? {
         let startViewController = SplashViewController()
@@ -22,9 +21,14 @@ class SplashViewCoordinator: SplashViewDelegate  {
         navigationController?.setViewControllers([startViewController], animated: false)
         return navigationController
     }
-    
+}
+
+// MARK: - SplashViewDelegate
+extension AppCoordinator: SplashViewDelegate {
     func navigateToHome() {
         let welcomeViewController = WelcomeViewController()
         navigationController?.setViewControllers([welcomeViewController], animated: true)
     }
 }
+
+
