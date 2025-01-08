@@ -23,11 +23,18 @@ class AppCoordinator {
     }
 }
 
-// MARK: - SplashViewDelegate
 extension AppCoordinator: SplashViewDelegate {
     func navigateToHome() {
         let welcomeViewController = WelcomeViewController()
+        welcomeViewController.delegate = self
         navigationController?.setViewControllers([welcomeViewController], animated: true)
+    }
+}
+
+extension AppCoordinator: WelcomeViewDelegate {
+    func navigateToLoginMethod() {
+        let loginMethod = LoginMethodViewController()
+        navigationController?.setViewControllers([loginMethod], animated: true)
     }
 }
 

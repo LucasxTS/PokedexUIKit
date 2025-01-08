@@ -17,7 +17,7 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         view = splashView
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
             self?.delegate?.navigateToHome()
         }
     }
