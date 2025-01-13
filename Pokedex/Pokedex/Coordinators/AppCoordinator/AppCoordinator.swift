@@ -34,8 +34,22 @@ extension AppCoordinator: SplashViewDelegate {
 extension AppCoordinator: WelcomeViewDelegate {
     func navigateToLoginMethod() {
         let loginMethod = LoginMethodViewController()
+        loginMethod.delegate = self
         navigationController?.setViewControllers([loginMethod], animated: true)
     }
+}
+
+extension AppCoordinator: LoginMethodDelegate {
+    func createAccount() {
+        let createAccount = CreateAccountViewController()
+        navigationController?.setViewControllers([createAccount], animated: true)
+    }
+    
+    func login() {
+        
+    }
+    
+  
 }
 
 
