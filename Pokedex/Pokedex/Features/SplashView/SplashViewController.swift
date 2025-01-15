@@ -16,7 +16,10 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = splashView
-        
+        navigateToHome()
+    }
+    
+    private func navigateToHome() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
             self?.delegate?.navigateToHome()
         }

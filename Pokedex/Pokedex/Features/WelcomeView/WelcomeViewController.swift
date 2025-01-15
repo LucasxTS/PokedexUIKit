@@ -18,14 +18,16 @@ class WelcomeViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        navigateToLoginMethod()
+    }
+    
+    private func navigateToLoginMethod() {
         welcomeView.continueButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
     
     @objc func didTapButton() {
         self.delegate?.navigateToLoginMethod()
-        print("clicado")
     }
-    
 }
     

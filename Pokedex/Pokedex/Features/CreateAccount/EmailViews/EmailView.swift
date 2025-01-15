@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CreateAccountView: UIView {
+class EmailView: UIView {
     
     lazy var topLabel: UILabel = {
         let label = UILabel()

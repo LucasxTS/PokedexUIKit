@@ -41,15 +41,23 @@ extension AppCoordinator: WelcomeViewDelegate {
 
 extension AppCoordinator: LoginMethodDelegate {
     func createAccount() {
-        let createAccount = CreateAccountViewController()
-        navigationController?.setViewControllers([createAccount], animated: true)
+        let emailView = EmailViewController()
+        emailView.delegate = self
+        navigationController?.setViewControllers([emailView], animated: true)
     }
     
     func login() {
         
     }
-    
-  
 }
 
+extension AppCoordinator: EmailViewDelegate {
+    func navigateToPassword(email: String) {
+        let passwordViewController = PasswordViewController()
+        passwordViewController.email = email
+        navigationController?.setViewControllers([passwordViewController], animated: true)
+    }
+    
+    
+}
 
