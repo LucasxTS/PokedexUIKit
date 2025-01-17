@@ -16,22 +16,17 @@ class EmailViewController: UIViewController, UITextFieldDelegate {
     override func loadView() {
         super.loadView()
         view = createAccountView
-        createAccountView.emailTextField.delegate = self
+        createAccountView.userTextField.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        createAccountView.emailTextField.becomeFirstResponder()
+        createAccountView.userTextField.becomeFirstResponder()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createAccountView.continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("editando")
-        print(userEmail)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -50,5 +45,4 @@ class EmailViewController: UIViewController, UITextFieldDelegate {
     @objc private func continueButtonTapped() {
         delegate?.navigateToPassword(email: userEmail)
     }
-    
 }

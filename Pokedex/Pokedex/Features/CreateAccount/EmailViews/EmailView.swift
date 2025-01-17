@@ -30,9 +30,9 @@ class EmailView: UIView {
         return label
     }()
     
-    lazy var emailLabel : UILabel = {
+    lazy var userLabel : UILabel = {
         let label = UILabel()
-        label.text = "Qual é o seu email?"
+        label.text = "Qual é o seu nickName?"
         label.textColor = .black
         label.font = label.font.withSize(26)
         label.textAlignment = .center
@@ -40,9 +40,9 @@ class EmailView: UIView {
         return label
     }()
     
-    lazy var emailTextField: UITextField = {
+    lazy var userTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "E-mail"
+        textField.placeholder = "Nick Name"
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.keyboardType = .emailAddress
@@ -57,7 +57,7 @@ class EmailView: UIView {
         label.font = label.font.withSize(12)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = "Use um endereço de e-mail válido."
+        label.text = "Diga como devemos lhe chamar"
         return label
     }()
     
@@ -86,8 +86,8 @@ class EmailView: UIView {
     private func addingSubviews() {
         addSubview(topLabel)
         addSubview(startLabel)
-        addSubview(emailLabel)
-        addSubview(emailTextField)
+        addSubview(userLabel)
+        addSubview(userTextField)
         addSubview(warningLabel)
         addSubview(continueButton)
     }
@@ -107,15 +107,15 @@ class EmailView: UIView {
             startLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             startLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
-            emailLabel.topAnchor.constraint(equalTo: startLabel.bottomAnchor, constant: 20),
-            emailLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            emailLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            userLabel.topAnchor.constraint(equalTo: startLabel.bottomAnchor, constant: 20),
+            userLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            userLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
-            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 20),
-            emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            userTextField.topAnchor.constraint(equalTo: userLabel.bottomAnchor, constant: 20),
+            userTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            userTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
-            warningLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20),
+            warningLabel.topAnchor.constraint(equalTo: userTextField.bottomAnchor, constant: 20),
             warningLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             warningLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             warningLabel.heightAnchor.constraint(equalToConstant: 18),
